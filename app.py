@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, send_from_directory
 import decision_tree_diabetes as dt
 import json
 import os
@@ -24,6 +24,10 @@ def train():
     result = dt.run(request.json)
     print(result)
     return json.dumps(result)
+
+@app.route('/favicon.ico') 
+def favicon(): 
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.after_request
 def add_header(r):
