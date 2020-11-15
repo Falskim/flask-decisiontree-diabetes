@@ -1,0 +1,203 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h1 class="header center orange-text">UTS DATA MINING</h1>
+    <div class="row center">
+      <h6 class="header col s12 light">Penerapan algoritma Decision Tree Classifier pada dataset Diabetes menggunakan
+        Python</i>
+      </h6>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+
+    <!-- KELOMPOK -->
+    <div class="col s12 m7">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content center">
+
+            <h4 class="header center blue-text">Kelompok 2</h4>
+            <h5 style="margin-bottom: 2rem;">Kelas A</h5>
+            <div class="container center">
+              <div class="row">
+
+                <div class="col s12 m4">
+                  <div class="icon-block">
+                    <b class="center">Fawwaz Syiham Muyassar</b>
+
+                    <p class="light">1177050044</p>
+                  </div>
+                </div>
+
+                <div class="col s12 m4">
+                  <div class="icon-block">
+                    <b class="center">Muhammad Iqbal Hadad</b>
+
+                    <p class="light">1177050070</p>
+                  </div>
+                </div>
+
+                <div class="col s12 m4">
+                  <div class="icon-block">
+                    <b class="center">Salma Nurzaqiah</b>
+
+                    <p class="light">1177050104</p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col s12 m6">
+                  <div class="icon-block">
+                    <b class="center">Adi Fitrianto</b>
+
+                    <p class="light">11770500005</p>
+                  </div>
+                </div>
+
+                <div class="col s12 m6">
+                  <div class="icon-block">
+                    <b class="center">Wawan Kurniawan</b>
+
+                    <p class="light">1177050118</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END KELOMPOK -->
+  </div>
+  <div class="section">
+
+    <div class="col s12 m7">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4 class="header center blue-text">Dataset Information</h4>
+            <!--   Icon Section   -->
+            <div class="collection">
+              <a href="#!" class="collection-item"><span class="badge">520</span>Total Data</a>
+              <a href="#!" class="collection-item"><span class="badge">17</span>Total Attributes</a>
+            </div>
+            <div class="row center">
+              <a href="{{url_for('dataset')}}" id="download-button"
+                class="btn-large waves-effect waves-light orange">View
+                Dataset</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+
+    <div class="col s12 m7">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content center">
+            <h4 class="header center blue-text">Dataset Training and Modelling</h4>
+            <!--   Icon Section   -->
+            <p>Algorithm Decision Tree Classifier with Cross Validation</p>
+            <div class="container">
+              <div class="center"></div>
+              <div id="trainParam" class="container">
+                <br>
+                <h5>Parameter Configuration</h5>
+                <div class="row">
+
+                  <div class="col s12 m6">
+                    <label>
+                      <input class="with-gap" name="param" type="radio" id="paramAuto" value="gini" checked />
+                      <span>Auto (Grid Search Estimator)</span>
+                    </label>
+                  </div>
+
+                  <div class="col s12 m6">
+                    <label>
+                      <input class="with-gap" name="param" type="radio" id="paramManual" value="gini" />
+                      <span>Manual</span>
+                    </label>
+                  </div>
+
+                </div>
+                <div id="paramManualForm" style="display: none;">
+                  <br>
+                  <h5>Select Criterion</h5>
+
+                  <div class="row">
+                    <div class="col s12 m6">
+                      <label>
+                        <input class="with-gap" name="criterion" id="paramCriterionGini" type="radio" value="gini" checked />
+                        <span>Gini Impurity</span>
+                      </label>
+                    </div>
+                    <div class="col s12 m6">
+                      <label>
+                        <input class="with-gap" name="criterion" type="radio" value="entropy" />
+                        <span>Entropy</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <br>
+                  <h5>Select Tree Max Depth</h5>
+                  <p class="range-field">
+                    <input type="range" id="paramMaxDepth" min="3" max="20" />
+                  </p>
+                </d>
+              </div>
+              <button href="#" id="trainButton" class="btn-large waves-effect waves-light orange">Train Data</button>
+            </div>
+
+            <div id="trainLoader" class="container" style="display: none;">
+              <br>
+              <img src="{{url_for('static', filename='ajax-loader.gif')}}">
+              <br>
+              <p><i>Training Model...</i></p>
+            </div>
+
+            <div id="trainResult" class="conatiner" style="display: none;">
+              <br>
+              <div class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <h4 class="header center blue-text">Train Result</h4>
+                    <!--   Icon Section   -->
+                    <div class="collection left-align">
+                      <a href="#!" class="collection-item"><span class="badge"
+                          id="resultCriterion">{Criterion}</span>Used Criterion</a>
+                      <a href="#!" class="collection-item"><span class="badge" id="resultMaxDepth">{Depth}</span>Max
+                        Depth</a>
+                      <a href="#!" class="collection-item"><span class="badge"
+                          id="resultAccuracy">{Accuracy}</span>Model Accuracy</a>
+                    </div>
+                    <div class="row center">
+                      <a href="{{url_for('model')}}" id="download-button"
+                        class="btn-large waves-effect waves-light orange">View
+                        Model Result</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+</div>
+
+{% endblock %}

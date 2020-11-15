@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  html {
+    display: table;
+    margin: auto;
+  }
+
+  body {
+    display: table-cell;
+    vertical-align: middle;
+  }
+</style>
+<p align="center">
+  <i>diabetes_data_upload.csv</i>
+</p>
+
+<div id="handsontable-container"></div>
+
+<script src="https://cdn.jsdelivr.net/handsontable/0.28.4/handsontable.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
+<script src="{{url_for('static', filename='dataset.js')}}"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/handsontable/0.28.4/handsontable.full.min.css">
+
+{% endblock %}
