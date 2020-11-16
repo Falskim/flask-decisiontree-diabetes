@@ -21,9 +21,13 @@ def dataset():
 
 @app.route('/train', methods=['POST'])
 def train():
-    # delete old model
     result = dt.run(request.json)
     print(result)
+    return json.dumps(result)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    result = dt.predict(request.json)
     return json.dumps(result)
 
 @app.route('/favicon.ico') 

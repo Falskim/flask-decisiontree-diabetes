@@ -61,9 +61,9 @@ def create_model(param = None):
   result['criterion'] = clf.best_params_['criterion']
   result['max_depth'] = clf.best_params_['max_depth']
 
-  save_model()
+  save_model(tree_model)
 
-def save_model():
+def save_model(tree_model):
   save_path = asset_directory + '/' + model_filename
   pickle.dump(tree_model, open(save_path, 'wb'))
   print('Decision tree trained model saved as ', save_path)
@@ -86,6 +86,18 @@ def save_graph_image(graph):
   save_path = asset_directory + '/' + image_filename
   graph.write_png(save_path)
   print('Decision tree model image saved as ', save_path)
+
+def predict(data):
+  parsed_data = [data[key] for key in data]
+  print("Parsed data : ", parsed_data)
+
+  load_path = asset_directory + '/' + model_filename
+  model = pickle.load(open(load_path, 'rb'))
+  prediction = int(model.predict([parsed_data])[0])
+  print("Prediction : ", prediction)
+
+  return {"class" : prediction}
+
 
 if __name__ == '__main__':
     run()

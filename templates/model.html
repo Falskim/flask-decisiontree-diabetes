@@ -19,12 +19,173 @@
     <div class="row center">
       <img src="{{url_for('static', filename='dtree.png')}}" />
       <br><br>
-      <a href="{{url_for('static', filename='dtree.png')}}" 
-      class="btn-large waves-effect waves-light orange">Enlarge Image</a>
+      <a href="{{url_for('static', filename='dtree.png')}}" class="btn-large waves-effect waves-light orange">Enlarge
+        Image</a>
     </div>
     <br><br>
 
-  </div>
-</div>
+    <!-- PREDICT DATA -->
+    <div class="container">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4 class="header center blue-text">Diabetes Prediction</h4>
 
-{% endblock %}
+            <form class="col s12" id="predictForm">
+              <div class="row">
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input placeholder="Age" value="30" min="10" max="100" id="age" name="age" type="number" class="active validate"
+                    required />
+                  <label for="age">Age</label>
+                </div>
+
+                <div class="input-field col s6">
+                  <select name="gender" required>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                  </select>
+                  <label>Gender</label>
+                </div>
+              </div>
+
+              <h5><i class="material-icons prefix">mode_edit</i> Syndrome</h5>
+              <br>
+              <div class="container" style="margin-left: 30px;">
+                <p>
+                  <label>
+                    <input name="polyuria" type="hidden" />
+                    <input name="polyuria" type="checkbox" class="filled-in" />
+                    <span>Polyuria</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="polydipsia" type="hidden" ` />
+                    <input name="polydipsia" type="checkbox" class="filled-in" />
+                    <span>Polydipsia</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="weight" type="hidden" />
+                    <input name="weight" type="checkbox" class="filled-in" />
+                    <span>Sudden Weight Loss</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="weakness" type="hidden" />
+                    <input name="weakness" type="checkbox" class="filled-in" />
+                    <span>Weakness</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="polyphagia" type="hidden" />
+                    <input name="polyphagia" type="checkbox" class="filled-in" />
+                    <span>Polyphagia</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="genital" type="hidden" />
+                    <input name="genital" type="checkbox" class="filled-in" />
+                    <span>Genital Thrush</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="visual" type="hidden" />
+                    <input name="visual" type="checkbox" class="filled-in" />
+                    <span>Visual Blurring</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="itching" type="hidden" />
+                    <input name="itching" type="checkbox" class="filled-in" />
+                    <span>Itching</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="Irritability" type="hidden" />
+                    <input name="Irritability" type="checkbox" class="filled-in" />
+                    <span>Irritability</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="delayed" type="hidden" />
+                    <input name="delayed" type="checkbox" class="filled-in" />
+                    <span>Delayed Healing</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="partial" type="hidden" />
+                    <input name="partial" type="checkbox" class="filled-in" />
+                    <span>Partial Paresis</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="muscle" type="hidden" />
+                    <input name="muscle" type="checkbox" class="filled-in" />
+                    <span>Muscle Stiffness</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="alopecia" type="hidden" />
+                    <input name="alopecia" type="checkbox" class="filled-in" />
+                    <span>Alopecia</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="obesity" type="hidden" />
+                    <input name="obesity" type="checkbox" class="filled-in" />
+                    <span>Obesity</span>
+                  </label>
+                </p>
+
+              </div>
+            </form>
+            <div class="row center">
+              <button id="predictButton" class="btn-large waves-effect waves-light orange">Predict Data</button>
+            </div>
+            
+            <div class="card horizontal" id="predictionResultCard" style="display: none;">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h4 class="header center blue-text">Prediction Result</h4>
+                  <!--   Icon Section   -->
+                  <div class="collection left-align">
+                    <a href="#!" class="collection-item"><span class="badge"
+                        id="predictionClass">{class}</span>Diabetes</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- END PREDICT DATA -->
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+
+
+  {% block script %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems);
+    });
+  </script>
+  <script src="{{url_for('static', filename='predict.js')}}"></script>
+  {% endblock %}
