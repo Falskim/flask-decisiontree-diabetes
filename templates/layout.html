@@ -4,19 +4,29 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>Datamining Kelompok 2</title>
+  <title>Datamining Group 2</title>
 
   <!-- CSS  -->
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='spinner.css')}}">
 
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
+<body><!--CSS Spinner-->
+  <div class="spinner-wrapper">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="{{url_for('index')}}" class="brand-logo">Data
         Mining</a>
@@ -32,8 +42,8 @@
 
   <footer class="page-footer orange">
     <div class="container center">
-      <h5 class="white-text">Data Mining - Kelompok 2</h5>
-      <p class="grey-text text-lighten-4">Kelas A</p>
+      <h5 class="white-text">Data Mining - Group 2</h5>
+      <p class="grey-text text-lighten-4">Class A</p>
     </div>
     <div class="footer-copyright">
       <div class="container">
@@ -44,12 +54,24 @@
 
 
   <!--  Scripts-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
   {% block script %}
 
   {% endblock %}
+  <script>
+    console.log('Not Ready')
+    $(document).ready(function () {
+    console.log('Ready')
+      //Preloader
+      preloaderFadeOutTime = 500;
+      function hidePreloader() {
+        var preloader = $('.spinner-wrapper');
+        preloader.fadeOut(preloaderFadeOutTime);
+      }
+      hidePreloader();
+    });
+  </script>
 </body>
 
 </html>
